@@ -5,25 +5,39 @@
 
 using namespace Rcpp;
 
-// diff_levenshtein
-int diff_levenshtein(SEXP obj);
-RcppExport SEXP _diffmatchpatch_diff_levenshtein(SEXP objSEXP) {
+// diff_make
+Rcpp::DataFrame diff_make(std::string const& x, std::string const& y, std::string cleanup, bool checklines);
+RcppExport SEXP _diffmatchpatch_diff_make(SEXP xSEXP, SEXP ySEXP, SEXP cleanupSEXP, SEXP checklinesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type obj(objSEXP);
-    rcpp_result_gen = Rcpp::wrap(diff_levenshtein(obj));
+    Rcpp::traits::input_parameter< std::string const& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< std::string const& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< std::string >::type cleanup(cleanupSEXP);
+    Rcpp::traits::input_parameter< bool >::type checklines(checklinesSEXP);
+    rcpp_result_gen = Rcpp::wrap(diff_make(x, y, cleanup, checklines));
+    return rcpp_result_gen;
+END_RCPP
+}
+// diff_levenshtein
+int diff_levenshtein(SEXP diff);
+RcppExport SEXP _diffmatchpatch_diff_levenshtein(SEXP diffSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type diff(diffSEXP);
+    rcpp_result_gen = Rcpp::wrap(diff_levenshtein(diff));
     return rcpp_result_gen;
 END_RCPP
 }
 // diff_to_delta
-std::string diff_to_delta(SEXP obj);
-RcppExport SEXP _diffmatchpatch_diff_to_delta(SEXP objSEXP) {
+std::string diff_to_delta(SEXP diff);
+RcppExport SEXP _diffmatchpatch_diff_to_delta(SEXP diffSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type obj(objSEXP);
-    rcpp_result_gen = Rcpp::wrap(diff_to_delta(obj));
+    Rcpp::traits::input_parameter< SEXP >::type diff(diffSEXP);
+    rcpp_result_gen = Rcpp::wrap(diff_to_delta(diff));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -40,60 +54,46 @@ BEGIN_RCPP
 END_RCPP
 }
 // diff_to_html
-std::string diff_to_html(SEXP obj);
-RcppExport SEXP _diffmatchpatch_diff_to_html(SEXP objSEXP) {
+std::string diff_to_html(SEXP diff);
+RcppExport SEXP _diffmatchpatch_diff_to_html(SEXP diffSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type obj(objSEXP);
-    rcpp_result_gen = Rcpp::wrap(diff_to_html(obj));
+    Rcpp::traits::input_parameter< SEXP >::type diff(diffSEXP);
+    rcpp_result_gen = Rcpp::wrap(diff_to_html(diff));
     return rcpp_result_gen;
 END_RCPP
 }
 // diff_to_patch
-std::string diff_to_patch(SEXP obj);
-RcppExport SEXP _diffmatchpatch_diff_to_patch(SEXP objSEXP) {
+std::string diff_to_patch(SEXP diff);
+RcppExport SEXP _diffmatchpatch_diff_to_patch(SEXP diffSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type obj(objSEXP);
-    rcpp_result_gen = Rcpp::wrap(diff_to_patch(obj));
+    Rcpp::traits::input_parameter< SEXP >::type diff(diffSEXP);
+    rcpp_result_gen = Rcpp::wrap(diff_to_patch(diff));
     return rcpp_result_gen;
 END_RCPP
 }
 // diff_text_source
-std::string diff_text_source(SEXP obj);
-RcppExport SEXP _diffmatchpatch_diff_text_source(SEXP objSEXP) {
+std::string diff_text_source(SEXP diff);
+RcppExport SEXP _diffmatchpatch_diff_text_source(SEXP diffSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type obj(objSEXP);
-    rcpp_result_gen = Rcpp::wrap(diff_text_source(obj));
+    Rcpp::traits::input_parameter< SEXP >::type diff(diffSEXP);
+    rcpp_result_gen = Rcpp::wrap(diff_text_source(diff));
     return rcpp_result_gen;
 END_RCPP
 }
 // diff_text_dest
-std::string diff_text_dest(SEXP obj);
-RcppExport SEXP _diffmatchpatch_diff_text_dest(SEXP objSEXP) {
+std::string diff_text_dest(SEXP diff);
+RcppExport SEXP _diffmatchpatch_diff_text_dest(SEXP diffSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type obj(objSEXP);
-    rcpp_result_gen = Rcpp::wrap(diff_text_dest(obj));
-    return rcpp_result_gen;
-END_RCPP
-}
-// diff_make
-Rcpp::DataFrame diff_make(std::string const& x, std::string const& y, std::string cleanup, bool checklines);
-RcppExport SEXP _diffmatchpatch_diff_make(SEXP xSEXP, SEXP ySEXP, SEXP cleanupSEXP, SEXP checklinesSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::string const& >::type x(xSEXP);
-    Rcpp::traits::input_parameter< std::string const& >::type y(ySEXP);
-    Rcpp::traits::input_parameter< std::string >::type cleanup(cleanupSEXP);
-    Rcpp::traits::input_parameter< bool >::type checklines(checklinesSEXP);
-    rcpp_result_gen = Rcpp::wrap(diff_make(x, y, cleanup, checklines));
+    Rcpp::traits::input_parameter< SEXP >::type diff(diffSEXP);
+    rcpp_result_gen = Rcpp::wrap(diff_text_dest(diff));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -156,6 +156,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_diffmatchpatch_diff_make", (DL_FUNC) &_diffmatchpatch_diff_make, 4},
     {"_diffmatchpatch_diff_levenshtein", (DL_FUNC) &_diffmatchpatch_diff_levenshtein, 1},
     {"_diffmatchpatch_diff_to_delta", (DL_FUNC) &_diffmatchpatch_diff_to_delta, 1},
     {"_diffmatchpatch_diff_from_delta", (DL_FUNC) &_diffmatchpatch_diff_from_delta, 2},
@@ -163,7 +164,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_diffmatchpatch_diff_to_patch", (DL_FUNC) &_diffmatchpatch_diff_to_patch, 1},
     {"_diffmatchpatch_diff_text_source", (DL_FUNC) &_diffmatchpatch_diff_text_source, 1},
     {"_diffmatchpatch_diff_text_dest", (DL_FUNC) &_diffmatchpatch_diff_text_dest, 1},
-    {"_diffmatchpatch_diff_make", (DL_FUNC) &_diffmatchpatch_diff_make, 4},
     {"_diffmatchpatch_match_find", (DL_FUNC) &_diffmatchpatch_match_find, 3},
     {"_diffmatchpatch_get_options", (DL_FUNC) &_diffmatchpatch_get_options, 0},
     {"_diffmatchpatch_set_options", (DL_FUNC) &_diffmatchpatch_set_options, 1},

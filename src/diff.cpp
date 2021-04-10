@@ -51,53 +51,37 @@ template <> Diffs as(SEXP obj) {
 
 }
 
-//' @export
-// [[Rcpp::export]]
-int diff_levenshtein(SEXP obj) {
-  return dmp.diff_levenshtein( Rcpp::as<Diffs>(obj) );
-}
 
-//' @export
-// [[Rcpp::export]]
-std::string diff_to_delta(SEXP obj) {
-  return dmp.diff_toDelta( Rcpp::as<Diffs>(obj) );
-}
-
-//' @export
-// [[Rcpp::export]]
-Rcpp::DataFrame diff_from_delta(std::string x, std::string delta) {
-  Diffs d = dmp.diff_fromDelta(x, delta);
-  
-  return Rcpp::wrap(d);
-}
-
-//' @export
-// [[Rcpp::export]]
-std::string diff_to_html(SEXP obj) {
-  return dmp.diff_prettyHtml( Rcpp::as<Diffs>(obj) );
-}
-
-//' @export
-// [[Rcpp::export]]
-std::string diff_to_patch(SEXP obj) {
-  Patches p = dmp.patch_make( Rcpp::as<Diffs>(obj) );
-  return dmp.patch_toText(p);
-}
-
-
-//' @export
-// [[Rcpp::export]]
-std::string diff_text_source(SEXP obj) {
-  return dmp.diff_text1( Rcpp::as<Diffs>(obj) );
-}
-
-//' @export
-// [[Rcpp::export]]
-std::string diff_text_dest(SEXP obj) {
-  return dmp.diff_text2( Rcpp::as<Diffs>(obj) );
-}
-
-
+//' @rdname diff
+//' 
+//' @title Compute diffs between text strings
+//'
+//' @description `diff_make()` computes character level diffs between the source string (`x`) and
+//' destination string (`y`).
+//'
+//' @param x The source string
+//' @param y The destination string
+//' @param cleanup Determines the cleanup method applied to the diffs. Allowed values include:
+//' `semantic`, `lossless`, `efficiency`, `merge` and `none`. See Details for the behavior of each of these.
+//' @param checklines Performance flag - if `FALSE`, then don't run a
+//' line-level diff first to identify the changed areas.
+//' If `TRUE`, run a faster slightly less optimal diff. Default: `TRUE`.
+//' 
+//' @details
+//' ## Cleanup methods
+//' 
+//' * `semantic` - Reduce the number of edits by eliminating semantically trivial equalities.
+//' * semantic `lossless` - Look for single edits surrounded on both sides by equalities
+//'   which can be shifted sideways to align the edit to a word boundary.
+//'   e.g: The c**at c**ame. -> The **cat **came.
+//' * `efficiency` - Reduce the number of edits by eliminating operationally trivial equalities.
+//' * `merge` - Reorder and merge like edit sections.  Merge equalities.
+//'   Any edit section can move as long as it doesn't cross an equality.
+//' * `none` - Do not apply any cleanup methods to the diffs.
+//'
+//'
+//' @return `diff_make()` returns a `diff_df` data frame containing the diffs.
+//'
 //' @export
 // [[Rcpp::export]]
 Rcpp::DataFrame diff_make(
@@ -120,4 +104,87 @@ Rcpp::DataFrame diff_make(
   
   return Rcpp::wrap(d);
 }
+
+
+//' @rdname diff
+//'
+//' @description `diff_levenshtein()` calculates the Levenshtein distance of a diff.
+//' @param diff A `diff_df` data frame contains a diff.
+//' @return `diff_make()` returns an integer.
+//'
+//' @export
+// [[Rcpp::export]]
+int diff_levenshtein(SEXP diff) {
+  return dmp.diff_levenshtein( Rcpp::as<Diffs>(diff) );
+}
+
+//' @rdname diff
+//'
+//' @description `diff_to_delta()` converts a diff to a delta string.
+//' @return `diff_to_delta()` returns an character string.
+//'
+//' @export
+// [[Rcpp::export]]
+std::string diff_to_delta(SEXP diff) {
+  return dmp.diff_toDelta( Rcpp::as<Diffs>(diff) );
+}
+
+//' @rdname diff
+//'
+//' @description `diff_from_delta()` creates a diff from a source string (`x`) and a `delta` string.
+//' @param delta A delta string.
+//' @return `diff_from_delta()` returns a `diff_df` data frame.
+//'
+//' @export
+// [[Rcpp::export]]
+Rcpp::DataFrame diff_from_delta(std::string x, std::string delta) {
+  Diffs d = dmp.diff_fromDelta(x, delta);
+  
+  return Rcpp::wrap(d);
+}
+
+//' @rdname diff
+//'
+//' @description `diff_to_html()` converts a diff to pretty HTML.
+//' @return `diff_to_html()` returns a character string.
+//'
+//' @export
+// [[Rcpp::export]]
+std::string diff_to_html(SEXP diff) {
+  return dmp.diff_prettyHtml( Rcpp::as<Diffs>(diff) );
+}
+
+//' @rdname diff
+//'
+//' @description `diff_to_patch()` converts a diff to a patch string.
+//' @return `diff_to_patch()` returns a character string.
+//'
+//' @export
+// [[Rcpp::export]]
+std::string diff_to_patch(SEXP diff) {
+  Patches p = dmp.patch_make( Rcpp::as<Diffs>(diff) );
+  return dmp.patch_toText(p);
+}
+
+//' @rdname diff
+//'
+//' @description `diff_text_source()` recovers the source string from a diff.
+//' @return `diff_text_source()` returns a character string.
+//'
+//' @export
+// [[Rcpp::export]]
+std::string diff_text_source(SEXP diff) {
+  return dmp.diff_text1( Rcpp::as<Diffs>(diff) );
+}
+//' @rdname diff
+//'
+//' @description `diff_text_dest()` recovers the destination string from a diff.
+//' @return `diff_text_dest()` returns a character string.
+//'
+//' @export
+// [[Rcpp::export]]
+std::string diff_text_dest(SEXP diff) {
+  return dmp.diff_text2( Rcpp::as<Diffs>(diff) );
+}
+
 
