@@ -5,8 +5,8 @@ Version: 0.1
 Date: 2021-04-10
 Author: Colin Rundel
 Maintainer: Colin Rundel <rundel@gmail.com>
-Description: R wrapper for Google's diff-match-patch library
-License: GPL (>= 2)
+Description: An R wrapper for Google's diff-match-patch library. It provides basic tools
+    for find string diffs, fuzzy matches, and constructing patches between strings.
 Encoding: UTF-8
 Imports: 
     cli,
@@ -14,3 +14,4 @@ Imports:
 LinkingTo: Rcpp
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
+License: Apache License (>= 2)
