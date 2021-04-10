@@ -1,15 +1,17 @@
+dpm_theme = list(
+  "EQUAL"  = function(x) { x },
+  "INSERT" = function(x) { cli::style_underline(cli::style_bold(cli::col_green(x))) },
+  "DELETE" = function(x) { cli::style_inverse(cli::style_bold(cli::col_red(x))) }
+)
+
 #' @exportS3Method
 print.diff_df = function(x, ...) {
-  text = purrr::pmap_chr(
-    x,
-    function(text, op) {
-      if (op == "EQUAL") {
-        cli::col_grey(text)
-      } else if (op == "INSERT") {
-        cli::bg_green(text)
-      } else if (op == "DELETE") {
-        cli::style_strikethrough(cli::bg_red(text)) 
-      }
+  text = apply(
+    x, 1,
+    function(row) {
+      text = row[1]
+      op = row[2]
+      dpm_theme[[op]](text)
     }
   )
   text = paste(text, collapse="")
