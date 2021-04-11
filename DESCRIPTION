@@ -1,6 +1,6 @@
 Package: diffmatchpatch
 Type: Package
-Title: String diff, match, and patch utilities for R
+Title: String Diff, Match, and Patch Utilities for R
 Version: 0.1
 Date: 2021-04-10
 Author: Colin Rundel

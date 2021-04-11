@@ -4,6 +4,8 @@
 # diffmatchpatch
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/rundel/diffmatchpatch/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/rundel/diffmatchpatch/actions/workflows/check-standard.yaml)
 <!-- badges: end -->
 
 `diffmatchpatch` provides an R wrapper for the [STL

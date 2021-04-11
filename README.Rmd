@@ -19,6 +19,7 @@ library(magrittr)
 # diffmatchpatch
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/rundel/diffmatchpatch/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/rundel/diffmatchpatch/actions/workflows/check-standard.yaml)
 <!-- badges: end -->
 
 `diffmatchpatch` provides an R wrapper for the [STL variant](https://github.com/leutloff/diff-match-patch-cpp-stl) of Google's [diff-match-patch](https://github.com/google/diff-match-patch/) library.
