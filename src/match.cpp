@@ -28,7 +28,7 @@
 //' @export
 // [[Rcpp::export]]
 int match_find(std::string const& text, std::string const& pattern, int loc = 1) {
-  loc = (loc < 0) ? 0 : --loc;
+  loc = (loc < 0) ? 0 : loc-1;
   
   int res = dmp.match_main(text, pattern, loc);
   
