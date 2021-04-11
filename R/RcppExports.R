@@ -134,12 +134,10 @@ match_find <- function(text, pattern, loc) {
     .Call(`_diffmatchpatch_match_find`, text, pattern, loc)
 }
 
-#' @export
 get_options <- function() {
     .Call(`_diffmatchpatch_get_options`)
 }
 
-#' @export
 set_options <- function(opts) {
     invisible(.Call(`_diffmatchpatch_set_options`, opts))
 }

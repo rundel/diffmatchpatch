@@ -4,7 +4,6 @@
 // [[Rcpp::plugins(cpp11)]]
 
 
-//' @export
 // [[Rcpp::export]]
 Rcpp::List get_options() {
   return Rcpp::List::create(
@@ -18,7 +17,6 @@ Rcpp::List get_options() {
   );
 }
 
-//' @export
 // [[Rcpp::export]]
 void set_options(Rcpp::List opts) {
   
@@ -44,7 +42,7 @@ void set_options(Rcpp::List opts) {
     } else if (option == "match_max_bits") {
       dmp.Match_MaxBits = (short) value;
     } else {
-      Rcpp::warning("Unknown option name");
+      Rcpp::warning("Warning: \"%s\" is not a valid diffmatchpatch option.", option);
     }
   }
 }
