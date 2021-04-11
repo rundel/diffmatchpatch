@@ -130,7 +130,7 @@ diff_text_dest <- function(diff) {
 #' @return Best match index or -1.
 #' 
 #' @export
-match_find <- function(text, pattern, loc) {
+match_find <- function(text, pattern, loc = 1L) {
     .Call(`_diffmatchpatch_match_find`, text, pattern, loc)
 }
 

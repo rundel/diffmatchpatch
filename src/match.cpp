@@ -27,8 +27,10 @@
 //' 
 //' @export
 // [[Rcpp::export]]
-int match_find(std::string const& text, std::string const& pattern, int loc) {
-  int res = dmp.match_main(text, pattern, loc-1);
+int match_find(std::string const& text, std::string const& pattern, int loc = 1) {
+  loc = (loc < 0) ? 0 : --loc;
+  
+  int res = dmp.match_main(text, pattern, loc);
   
   // Adjust for R's 1-based indexing
   return (res == -1) ? -1 : res + 1;

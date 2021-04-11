@@ -4,7 +4,7 @@
 \alias{match_find}
 \title{Fuzzy matching of a text string}
 \usage{
-match_find(text, pattern, loc)
+match_find(text, pattern, loc = 1L)
 }
 \arguments{
 \item{text}{The text to search.}
