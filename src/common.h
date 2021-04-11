@@ -3,7 +3,7 @@
 
 #include "diff_match_patch.h"
 
-static diff_match_patch<std::string> dmp;
+extern diff_match_patch<std::string> dmp;
 
 typedef diff_match_patch<std::string>::Diff Diff;
 typedef diff_match_patch<std::string>::Diffs Diffs;

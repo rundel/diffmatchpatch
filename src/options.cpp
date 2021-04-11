@@ -3,6 +3,7 @@
 
 // [[Rcpp::plugins(cpp11)]]
 
+diff_match_patch<std::string> dmp;
 
 // [[Rcpp::export]]
 Rcpp::List get_options() {
