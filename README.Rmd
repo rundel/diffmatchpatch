@@ -1,9 +1,6 @@
 ---
-title: diffmatchpatch
-output:
-  md_document:
-    variant: gfm
-always_allow_html: yes
+output: github_document
+always_allow_html: true
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -16,15 +13,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 
-options(cli.num_colors = 256L)
-asciicast::init_knitr_engine(
-  startup = quote({
-    library(cli)
-    set.seed(1) 
-  }),
-  echo = TRUE,
-  echo_input = FALSE
-)
+library(magrittr)
 ```
 
 # diffmatchpatch
@@ -54,11 +43,11 @@ devtools::install_github("rundel/diffmatchpatch")
 
 ## Examples
 
-All of the following examples are derived from the demos linked from Google's [diffmatchpatch repo](https://github.com/google/diff-match-patch).
+All of the following examples are derived from Neil Fraser's demos linked from Google's [diffmatchpatch repo](https://github.com/google/diff-match-patch): [diff](https://neil.fraser.name/software/diff_match_patch/demos/diff.html), [match](https://neil.fraser.name/software/diff_match_patch/demos/match.html), [patch](https://neil.fraser.name/software/diff_match_patch/demos/patch.html).
 
 These examples are all run using the default options provided by the library.
 
-```{asciicast load}
+```{r load}
 library(diffmatchpatch)
 
 dmp_options()
@@ -66,9 +55,9 @@ dmp_options()
 
 ### diff
 
-These functions compare to text strings and efficiently return a list of (character level) differences.
+These functions compare two text strings and efficiently return a list of (character level) differences. Note that the following text indicates deletions with `-|text|-` and additions with `+|text|+` - within environments that support ANSI escape strings (e.g. RStudio) these will be colored red and green respectively.
 
-```{asciicast diff1}
+```{r diff1}
 src = "I am the very model of a modern Major-General,
 I've information vegetable, animal, and mineral,
 I know the kings of England, and I quote the fights historical,
@@ -82,16 +71,96 @@ From wicked puns and stupid jokes to anvils that drop on your head."
 diff_make(src, dest)
 ```
 
-```{asciicast diff2}
+```{r diff2}
 diff_make(src, dest, cleanup = "efficiency")
 ```
 
-```{asciicast diff3}
+```{r diff3}
 diff_make(src, dest, cleanup = "none")
+```
+
+There are a number of helper functions provided for interacting with the resulting diff objects.
+
+```{r}
+d = diff_make(src, dest, cleanup = "efficiency")
+
+diff_levenshtein(d)
+ 
+diff_to_patch(d) %>% cat()
+
+diff_to_html(d) %>% cat()
+
+diff_text_source(d) %>% cat()
+
+diff_text_dest(d) %>% cat()
 ```
 
 ### match
 
+`match_find` looks for a pattern within a larger text string using fuzzy matching. This means it can find a match even if the pattern contains errors and doesn't exactly match what is found in the text. Candidate matches are scored based on a) the number of spelling differences between the pattern and the text and b) the distance between the candidate match and the expected location.
+
+The returned value indicates the starting index (1-based indexing) of the matched text. The function returns -1 in cases where a match cannot be found.
+
+```{r}
+text = "'Twas brillig, and the slithy toves
+Did gyre and gimble in the wabe.
+All mimsy were the borogroves,
+And the mome raths outgrabe."
+
+match_find(text, pattern = "slimy tools")
+```
+
+
+There is an additonal `loc` argument that provides a suggested location of where the pattern is expected to be found.
+
+```{r}
+match_find(text, pattern = "and", loc = 0)
+match_find(text, pattern = "and", loc = 30)
+match_find(text, pattern = "and", loc = 50)
+```
+
+Finally, the behavior of the fuzzy matching is controlled by the `match_distance` and `match_threshold` options which can be set via `dpm_options()`.
+
+```{r}
+prev = dmp_options(match_threshold = 0.3)
+match_find(text, pattern = "slimy tools", loc = 30)
+
+dmp_options(prev)
+```
+
 
 ### patch
 
+A patch is just a description of how to transform one text string into another (i.e. a fancy diff) and once constructed can be applied against a new string (or the original). See this [ article](https://en.wikipedia.org/wiki/Diff#Unified_format) for more details on the specific formatting of a patch text string.
+
+```{r}
+source = "Hamlet: Do you see yonder cloud that's almost in shape of a camel?
+Polonius: By the mass, and 'tis like a camel, indeed.
+Hamlet: Methinks it is like a weasel.
+Polonius: It is backed like a weasel.
+Hamlet: Or like a whale?
+Polonius: Very like a whale.
+-- Shakespeare"
+
+dest = "Hamlet: Do you see the cloud over there that's almost the shape of a camel?
+Polonius: By golly, it is like a camel, indeed.
+Hamlet: I think it looks like a weasel.
+Polonius: It is shaped like a weasel.
+Hamlet: Or like a whale?
+Polonius: It's totally like a whale.
+-- Shakespeare"
+
+(p = patch_make(source, dest))
+```
+
+```{r}
+new_source = "Kirk: Do you see yonder cloud that's almost in shape of a Klingon?
+Spock: By the mass, and 'tis like a Klingon, indeed.
+Kirk: Methinks it is like a Vulcan.
+Spock: It is backed like a Vulcan.
+Kirk: Or like a Romulan?
+Spock: Very like a Romulan.
+-- Trekkie"
+
+patch_apply(new_source, p) %>% cat()
+```
