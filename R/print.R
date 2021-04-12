@@ -4,14 +4,19 @@ dpm_theme = list(
   "DELETE" = function(x) { cli::style_inverse(cli::style_bold(cli::col_red(x))) }
 )
 
+supports_ansi = function() {
+  cli::num_ansi_colors() > 1
+}
+
 #' @exportS3Method
-print.diff_df = function(x, ...) {
+as.character.diff_df = function(x, use_ansi = supports_ansi(), theme = dpm_theme, ...) {
+  
   text = apply(
     x, 1,
     function(row) {
       text = row[1]
       op = row[2]
-      if (cli::is_ansi_tty()) {
+      if (use_ansi) {
         dpm_theme[[op]](text)
       } else if (op == "INSERT") {
         paste0("+|", text, "|+")
@@ -24,7 +29,11 @@ print.diff_df = function(x, ...) {
       }
     }
   )
-  text = paste(text, collapse="")
   
-  cli::cat_line(text)
+  paste(text, collapse="")
+}
+
+#' @exportS3Method
+print.diff_df = function(x, ...) {
+  cli::cat_line(as.character(x, ...))
 }
