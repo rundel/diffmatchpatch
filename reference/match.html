@@ -44,10 +44,12 @@
 Bitap algorithm.Returns -1 if no match found. Assumes R's typical 1-based indexing for loc
 and the returned value.
 This algorithm makes use of the match_distance and match_threshold options to determine
-the match.
-Candidate matches are scored based on a) the number of spelling differences between the pattern
-and the text and b) the distance between the candidate match and the expected location. The
-match_distance option determines the relative importance of these two metrics." />
+the match. If these values are not set explicitly via the threshold and distance arguments -
+their value will use the currently set global option value.
+Candidate matches are scored based on:
+a) the number of spelling differences between the pattern and the text and
+b) the distance between the candidate match and the expected location.
+The match_distance option determines the relative importance of these two metrics." />
 
 
 
@@ -120,13 +122,15 @@ match_distance option determines the relative importance of these two metrics." 
 Bitap algorithm.Returns <code>-1</code> if no match found. Assumes R's typical 1-based indexing for <code>loc</code>
 and the returned value.</p>
 <p>This algorithm makes use of the <code>match_distance</code> and <code>match_threshold</code> options to determine
-the match.</p>
-<p>Candidate matches are scored based on a) the number of spelling differences between the pattern
-and the text and b) the distance between the candidate match and the expected location. The
-<code>match_distance</code> option determines the relative importance of these two metrics.</p>
+the match. If these values are not set explicitly via the <code>threshold</code> and <code>distance</code> arguments -
+their value will use the currently set global option value.</p>
+<p>Candidate matches are scored based on:
+a) the number of spelling differences between the pattern and the text and
+b) the distance between the candidate match and the expected location.</p>
+<p>The <code>match_distance</code> option determines the relative importance of these two metrics.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>match_find</span><span class='op'>(</span><span class='va'>text</span>, <span class='va'>pattern</span>, loc <span class='op'>=</span> <span class='fl'>1L</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>match_find</span><span class='op'>(</span><span class='va'>text</span>, <span class='va'>pattern</span>, loc <span class='op'>=</span> <span class='fl'>1L</span>, threshold <span class='op'>=</span> <span class='cn'>NULL</span>, distance <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,14 +145,38 @@ and the text and b) the distance between the candidate match and the expected lo
     </tr>
     <tr>
       <th>loc</th>
-      <td><p>The location to search around.</p></td>
+      <td><p>The expected location of the pattern.</p></td>
+    </tr>
+    <tr>
+      <th>threshold</th>
+      <td><p>Threshold for determining a match (0 - perfect match, 1 - very loose).</p></td>
+    </tr>
+    <tr>
+      <th>distance</th>
+      <td><p>Distance from expected location scaling for score penalty.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Best match index or -1.</p>
+    <p>Index of best match or -1 for no match.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>=</span> <span class='st'>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
+exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
+dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+mollit anim id est laborum."</span>
+
+<span class='fu'>match_find</span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>"Loren Ibsen"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 1</div><div class='input'>
+<span class='fu'>match_find</span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>"minimum"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 137</div><div class='input'>
+<span class='fu'><a href='dmp_options.html'>dmp_options</a></span><span class='op'>(</span>match_threshold <span class='op'>=</span> <span class='fl'>0.4</span><span class='op'>)</span>
+<span class='fu'>match_find</span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>"minimum"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] -1</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

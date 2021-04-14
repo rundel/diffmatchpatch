@@ -257,10 +257,16 @@ Any edit section can move as long as it doesn't cross an equality.</p></li>
 </div><div class='output co'>#&gt; [1] 3</div><div class='input'>
 <span class='fu'>diff_to_html</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "&lt;span&gt;abc&lt;/span&gt;&lt;del style=\"background:#ffe6e6;\"&gt;def&lt;/del&gt;&lt;ins style=\"background:#e6ffe6;\"&gt;hij&lt;/ins&gt;"</div><div class='input'>
-<span class='fu'>diff_test_source</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span> 
-</div><div class='output co'>#&gt; <span class='error'>Error in diff_test_source(d): could not find function "diff_test_source"</span></div><div class='input'>
-<span class='fu'>diff_test_dest</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span> 
-</div><div class='output co'>#&gt; <span class='error'>Error in diff_test_dest(d): could not find function "diff_test_dest"</span></div></span></pre>
+<span class='fu'>diff_text_source</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span> 
+</div><div class='output co'>#&gt; [1] "abcdef"</div><div class='input'>
+<span class='fu'>diff_text_dest</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span> 
+</div><div class='output co'>#&gt; [1] "abchij"</div><div class='input'>
+<span class='fu'>diff_to_patch</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "@@ -1,6 +1,6 @@\n abc\n-def\n+hij\n"</div><div class='input'>
+<span class='op'>(</span><span class='va'>delta</span> <span class='op'>=</span> <span class='fu'>diff_to_delta</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "=3\t-3\t+hij"</div><div class='input'>
+<span class='fu'>diff_from_delta</span><span class='op'>(</span><span class='st'>"abcdef"</span>, <span class='va'>delta</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; abc</span><span style='background-color: #BB0000;font-weight: bold;'>def</span><span style='background-color: #00BB00;font-weight: bold;'>hij</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
