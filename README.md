@@ -193,7 +193,7 @@ match_find(text, pattern = "slimy tools")
 #> [1] 24
 ```
 
-There is an additonal `loc` argument that provides a suggested location
+There is an additional `loc` argument that provides a suggested location
 of where the pattern is expected to be found.
 
 ``` r

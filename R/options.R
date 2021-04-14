@@ -7,7 +7,7 @@
 #' when setting options returns a named list of the previous value(s).
 #' 
 #' @param ... No arguments returns all current options and their values. Character values retrieve a subset 
-#' of options anf the current values. Options can be set, using name = value. However, only the options named 
+#' of options and the current values. Options can be set, using name = value. However, only the options named 
 #' below are used. Options can also be passed by giving a single unnamed argument which is a named list.
 #'
 #' @details ## Available options

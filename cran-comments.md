@@ -1,6 +1,6 @@
 ## Test environments
 * local R installation - R 4.0.5, MacOS 11.3
-* GitHub actions:
+* R CMD check via GitHub actions:
   * windows-latest (release)
   * macOS-latest (release)
   * ubuntu-20.04 (release)
@@ -8,6 +8,8 @@
 
 ## R CMD check results
 
-Thegre were no ERRORs, WARNINGS, or NOTEs.
+There are no ERRORs or WARNINGs.
+
+There is only 1 NOTE:
 
 * This is a new release.
