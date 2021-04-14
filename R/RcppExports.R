@@ -2,16 +2,10 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' @rdname diff
-#' 
-#' @title Compute diffs between text strings
 #'
-#' @description `diff_make()` computes character level diffs between the source string (`x`) and
-#' destination string (`y`).
-#'
-#' @param x The source string
-#' @param y The destination string
 #' @param cleanup Determines the cleanup method applied to the diffs. Allowed values include:
-#' `semantic`, `lossless`, `efficiency`, `merge` and `none`. See Details for the behavior of each of these.
+#' `semantic`, `lossless`, `efficiency`, `merge` and `none`. See Details for the behavior of 
+#' these methods.
 #' @param checklines Performance flag - if `FALSE`, then don't run a
 #' line-level diff first to identify the changed areas.
 #' If `TRUE`, run a faster slightly less optimal diff. Default: `TRUE`.
@@ -28,8 +22,7 @@
 #'   Any edit section can move as long as it doesn't cross an equality.
 #' * `none` - Do not apply any cleanup methods to the diffs.
 #'
-#'
-#' @return `diff_make()` returns a `diff_df` data frame containing the diffs.
+#' @return * `diff_make()` returns a `diff_df` data frame containing the diffs.
 #'
 #' @export
 diff_make <- function(x, y, cleanup = "semantic", checklines = TRUE) {
@@ -37,72 +30,49 @@ diff_make <- function(x, y, cleanup = "semantic", checklines = TRUE) {
 }
 
 #' @rdname diff
-#'
-#' @description `diff_levenshtein()` calculates the Levenshtein distance of a diff.
-#' @param diff A `diff_df` data frame contains a diff.
-#' @return `diff_make()` returns an integer.
-#'
+#' @return * `diff_make()` returns the Levenshtein distance as an integer.
 #' @export
 diff_levenshtein <- function(diff) {
     .Call(`_diffmatchpatch_diff_levenshtein`, diff)
 }
 
 #' @rdname diff
-#'
-#' @description `diff_to_delta()` converts a diff to a delta string.
-#' @return `diff_to_delta()` returns an character string.
-#'
+#' @return * `diff_to_delta()` returns an character string.
 #' @export
 diff_to_delta <- function(diff) {
     .Call(`_diffmatchpatch_diff_to_delta`, diff)
 }
 
 #' @rdname diff
-#'
-#' @description `diff_from_delta()` creates a diff from a source string (`x`) and a `delta` string.
-#' @param delta A delta string.
-#' @return `diff_from_delta()` returns a `diff_df` data frame.
-#'
+#' @return * `diff_from_delta()` returns a `diff_df` data frame.
 #' @export
 diff_from_delta <- function(x, delta) {
     .Call(`_diffmatchpatch_diff_from_delta`, x, delta)
 }
 
 #' @rdname diff
-#'
-#' @description `diff_to_html()` converts a diff to pretty HTML.
-#' @return `diff_to_html()` returns a character string.
-#'
+#' @return * `diff_to_html()` returns a character string.
 #' @export
 diff_to_html <- function(diff) {
     .Call(`_diffmatchpatch_diff_to_html`, diff)
 }
 
 #' @rdname diff
-#'
-#' @description `diff_to_patch()` converts a diff to a patch string.
-#' @return `diff_to_patch()` returns a character string.
-#'
+#' @return * `diff_to_patch()` returns a character string.
 #' @export
 diff_to_patch <- function(diff) {
     .Call(`_diffmatchpatch_diff_to_patch`, diff)
 }
 
 #' @rdname diff
-#'
-#' @description `diff_text_source()` recovers the source string from a diff.
-#' @return `diff_text_source()` returns a character string.
-#'
+#' @return * `diff_text_source()` returns a character string.
 #' @export
 diff_text_source <- function(diff) {
     .Call(`_diffmatchpatch_diff_text_source`, diff)
 }
 
 #' @rdname diff
-#'
-#' @description `diff_text_dest()` recovers the destination string from a diff.
-#' @return `diff_text_dest()` returns a character string.
-#'
+#' @return * `diff_text_dest()` returns a character string.
 #' @export
 diff_text_dest <- function(diff) {
     .Call(`_diffmatchpatch_diff_text_dest`, diff)
