@@ -170,11 +170,10 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
 mollit anim id est laborum."</span>
 
 <span class='fu'>match_find</span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>"Loren Ibsen"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 1</div><div class='input'>
+</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'>match_find</span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>"Loren Ibsen"</span>, threshold <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] -1</div><div class='input'>
 <span class='fu'>match_find</span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>"minimum"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 137</div><div class='input'>
-<span class='fu'><a href='dmp_options.html'>dmp_options</a></span><span class='op'>(</span>match_threshold <span class='op'>=</span> <span class='fl'>0.4</span><span class='op'>)</span>
-<span class='fu'>match_find</span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>"minimum"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 137</div><div class='input'><span class='fu'>match_find</span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>"minimum"</span>, threshold <span class='op'>=</span> <span class='fl'>0.4</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] -1</div><div class='input'>
 </div></pre>
   </div>
