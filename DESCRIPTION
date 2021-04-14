@@ -6,7 +6,7 @@ Date: 2021-04-10
 Author: Colin Rundel
 Maintainer: Colin Rundel <rundel@gmail.com>
 Description: An R wrapper for Google's diff-match-patch library. It provides basic tools
-    for find string diffs, fuzzy matches, and constructing patches between strings.
+    for computing diffs, finding fuzzy matches, and constructing / applying patches to strings.
 Encoding: UTF-8
 Imports: 
     cli,
