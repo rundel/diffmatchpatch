@@ -10,6 +10,9 @@ supports_ansi = function() {
 
 #' @exportS3Method
 as.character.diff_df = function(x, use_ansi = supports_ansi(), theme = dpm_theme, ...) {
+  if (nrow(x) == 0)
+    return("")
+  
   
   text = apply(
     x, 1,
