@@ -1,4 +1,4 @@
-# diffmatchpatch 0.1
+# diffmatchpatch 0.1.0
 
 * Initial release with support for the core diff, match, and patch functions.
 
