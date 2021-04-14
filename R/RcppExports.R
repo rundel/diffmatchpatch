@@ -116,31 +116,16 @@ set_options <- function(opts) {
 }
 
 #' @rdname patch
-#' 
-#' @title Create and apply patches to a text string
-#'
-#' @description `patch_make()` computes a list of patches to turn the source string (`x`) into the
-#' destination string (`y`).
-#'
-#' @param x The source string
-#' @param y The destination string
-#' 
 #' @return `patch_make()` returns a string representation of the patch(es).
-#'
 #' @export
 patch_make <- function(x, y) {
     .Call(`_diffmatchpatch_patch_make`, x, y)
 }
 
 #' @rdname patch
-#'
-#' @description `patch_apply()` applies the `patch` to `x`.
-#'
-#' @param patch A string representation of the patch(es).
-#'
-#' @return `patch_apply()` returns the patched version of the string x, the `matches` attribute 
-#' contains logical values indicating which patches were successfully applied.
-#'
+#' @return * `patch_apply()` returns the patched version of the string `x`, 
+#' the `matches` attribute contains logical values indicating which patches 
+#' were successfully applied.
 #' @export
 patch_apply <- function(x, patch) {
     .Call(`_diffmatchpatch_patch_apply`, x, patch)
