@@ -122,7 +122,13 @@ diff_levenshtein(d)
 
 diff_to_html(d)
 
-diff_test_source(d) 
+diff_text_source(d) 
 
-diff_test_dest(d) 
+diff_text_dest(d) 
+
+diff_to_patch(d)
+
+(delta = diff_to_delta(d))
+
+diff_from_delta("abcdef", delta)
 }
