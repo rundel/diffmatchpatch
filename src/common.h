@@ -16,4 +16,9 @@ namespace Rcpp {
   template <> Diffs as(SEXP df);
 }
 
+#include <Rcpp.h>
+
+Rcpp::List get_options();
+void set_options(Rcpp::List opts);
+
 #endif

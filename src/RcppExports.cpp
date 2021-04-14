@@ -98,15 +98,17 @@ BEGIN_RCPP
 END_RCPP
 }
 // match_find
-int match_find(std::string const& text, std::string const& pattern, int loc);
-RcppExport SEXP _diffmatchpatch_match_find(SEXP textSEXP, SEXP patternSEXP, SEXP locSEXP) {
+int match_find(std::string const& text, std::string const& pattern, int loc, SEXP threshold, SEXP distance);
+RcppExport SEXP _diffmatchpatch_match_find(SEXP textSEXP, SEXP patternSEXP, SEXP locSEXP, SEXP thresholdSEXP, SEXP distanceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::string const& >::type text(textSEXP);
     Rcpp::traits::input_parameter< std::string const& >::type pattern(patternSEXP);
     Rcpp::traits::input_parameter< int >::type loc(locSEXP);
-    rcpp_result_gen = Rcpp::wrap(match_find(text, pattern, loc));
+    Rcpp::traits::input_parameter< SEXP >::type threshold(thresholdSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type distance(distanceSEXP);
+    rcpp_result_gen = Rcpp::wrap(match_find(text, pattern, loc, threshold, distance));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -164,7 +166,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_diffmatchpatch_diff_to_patch", (DL_FUNC) &_diffmatchpatch_diff_to_patch, 1},
     {"_diffmatchpatch_diff_text_source", (DL_FUNC) &_diffmatchpatch_diff_text_source, 1},
     {"_diffmatchpatch_diff_text_dest", (DL_FUNC) &_diffmatchpatch_diff_text_dest, 1},
-    {"_diffmatchpatch_match_find", (DL_FUNC) &_diffmatchpatch_match_find, 3},
+    {"_diffmatchpatch_match_find", (DL_FUNC) &_diffmatchpatch_match_find, 5},
     {"_diffmatchpatch_get_options", (DL_FUNC) &_diffmatchpatch_get_options, 0},
     {"_diffmatchpatch_set_options", (DL_FUNC) &_diffmatchpatch_set_options, 1},
     {"_diffmatchpatch_patch_make", (DL_FUNC) &_diffmatchpatch_patch_make, 2},
