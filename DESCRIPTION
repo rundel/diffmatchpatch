@@ -1,11 +1,47 @@
 Package: diffmatchpatch
 Type: Package
-Title: String Diff, Match, and Patch Utilities for R
+Title: String Diff, Match, and Patch Utilities
 Version: 0.1.0
 Date: 2021-04-10
-Author: Colin Rundel
-Maintainer: Colin Rundel <rundel@gmail.com>
-Description: An R wrapper for Google's diff-match-patch library. It provides basic tools
+Authors@R: 
+  c(person(
+      given = "Colin",
+      family = "Rundel",
+      role = c("aut", "cre"),
+      email = "rundel@gmail.com"
+    ),
+    person(
+      family = "Google Inc.",
+      role = "cph",
+      comment = "diff_match_patch.h"
+    ),
+    person(
+      given = "Neil",
+      family = "Fraser",
+      role = "cph",
+      comment = "diff_match_patch.h"
+    ),
+    person(
+      given = "Mike",
+      family = "Slemmer",
+      role = "cph",
+      comment = "diff_match_patch.h"
+    ),
+    person(
+      given = "Sergey",
+      family = "Nozhenko",
+      role = "cph",
+      comment = "diff_match_patch.h"
+    ),
+    person(
+      given = "Christian",
+      family = "Leutloff",
+      role = "cph",
+      comment = "diff_match_patch.h"
+    )
+  )
+Copyright: Google Inc., Neil Fraser, Mike Slemmer, Sergey Nozhenko, Christian Leutloff, Colin Rundel
+Description: A wrapper for Google's 'diff-match-patch' library. It provides basic tools
     for computing diffs, finding fuzzy matches, and constructing / applying patches to strings.
 Encoding: UTF-8
 Imports: 
