@@ -17,16 +17,15 @@ library.
 
 ## Installation
 
-<!--
-You can install the released version of diffmatchpatch from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of diffmatchpatch from
+[CRAN](https://CRAN.R-project.org) with:
 
 ``` r
 install.packages("diffmatchpatch")
 ```
--->
 
-Currently only the development version of this library is available and
-can be installed directly from [GitHub](https://github.com/) with:
+The development version of this library can be installed directly from
+[GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
