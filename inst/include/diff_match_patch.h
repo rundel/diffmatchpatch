@@ -30,6 +30,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <type_traits>
 #include <algorithm>
 #include <cstdlib>
 #include <cwchar>
@@ -643,8 +644,13 @@ class diff_match_patch {
     // "\x00" is a valid character, but various debuggers don't like it.
     // So we'll insert a junk entry to avoid generating a null character.
 
-    text1 = diff_linesToCharsMunge(lineArray.text1, lineHash);
-    text2 = diff_linesToCharsMunge(lineArray.text2, lineHash);
+    // Each line is encoded as a single char_t, so the number of distinct lines
+    // is capped by the range of char_t (255 for char). Text1 gets part of the
+    // budget so text2 is left room for its own lines.
+    typedef typename std::make_unsigned<char_t>::type unsigned_char_t;
+    const size_t maxCode = std::min<size_t>(std::numeric_limits<unsigned_char_t>::max(), std::numeric_limits<size_t>::max() / 2);
+    text1 = diff_linesToCharsMunge(lineArray.text1, lineHash, maxCode / 3 * 2);
+    text2 = diff_linesToCharsMunge(lineArray.text2, lineHash, maxCode);
 
     lineArray.resize(lineHash.size() + 1);
     for (typename std::map<LinePtr, size_t>::const_iterator i = lineHash.begin(); i != lineHash.end(); ++i)
@@ -659,15 +665,20 @@ class diff_match_patch {
    * @return Encoded string.
    */
  private:
-  static string_t diff_linesToCharsMunge(const string_t &text, std::map<LinePtr, size_t> &lineHash) {
+  static string_t diff_linesToCharsMunge(const string_t &text, std::map<LinePtr, size_t> &lineHash, size_t maxLines) {
     string_t chars;
     // Walk the text, pulling out a substring for each line.
     // text.split('\n') would would temporarily double our memory footprint.
     // Modifying text would create many large strings to garbage collect.
     typename string_t::size_type lineLen;
     for (typename string_t::const_pointer lineStart = text.c_str(), textEnd = lineStart + text.size(); lineStart < textEnd; lineStart += lineLen + 1) {
-      lineLen = next_token(text, traits::from_wchar(L'\n'), lineStart);
-      if (lineStart + lineLen == textEnd) --lineLen;
+      if (lineHash.size() + 1 >= maxLines) {
+        // Out of codes: treat the rest of the text as a single line.
+        lineLen = textEnd - lineStart - 1;
+      } else {
+        lineLen = next_token(text, traits::from_wchar(L'\n'), lineStart);
+        if (lineStart + lineLen == textEnd) --lineLen;
+      }
       chars += (char_t)(*lineHash.insert(std::make_pair(LinePtr(lineStart, lineLen + 1), lineHash.size() + 1)).first).second;
     }
     return chars;
@@ -684,7 +695,8 @@ class diff_match_patch {
     for (typename Diffs::iterator cur_diff = diffs.begin(); cur_diff != diffs.end(); ++cur_diff) {
       string_t text;
       for (int y = 0; y < (int)(*cur_diff).text.length(); y++) {
-        const LinePtr& lp = lineArray[static_cast<size_t>((*cur_diff).text[y])];
+          typedef typename std::make_unsigned<typename string_t::value_type>::type unsigned_value_type;
+          const LinePtr& lp = lineArray[static_cast<size_t>(static_cast<unsigned_value_type>((*cur_diff).text[y]))];
         text.append(lp.first, lp.second);
       }
       (*cur_diff).text.swap(text);
