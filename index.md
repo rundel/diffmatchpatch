@@ -7,8 +7,16 @@ library.
 
 ## Installation
 
-Currently only the development version of this library is available and
-can be installed directly from [GitHub](https://github.com/) with:
+You can install the released version of diffmatchpatch from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+
+install.packages("diffmatchpatch")
+```
+
+The development version can be installed directly from
+[GitHub](https://github.com/) with:
 
 ``` r
 
