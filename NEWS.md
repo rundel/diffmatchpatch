@@ -1,4 +1,4 @@
-# diffmatchpatch (development version)
+# diffmatchpatch 0.2.0
 
 * Updated `diff_match_patch.h` with the upstream fix for a buffer overflow in line mode diffs when there are more than 127 unique lines, which could crash R (leutloff/diff-match-patch-cpp-stl#19).
 
