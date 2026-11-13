@@ -1,26 +1,21 @@
+## Submission
+
+This release fixes a buffer overflow in the bundled `diff_match_patch.h` header (from an upstream fix) that could crash R when diffing texts with more than 127 unique lines, fixes incorrect line mode diffs for texts with more than 255 unique lines, and adds a test suite.
+
 ## Test environments
-* local R installation - R 4.0.5, MacOS 11.3
-* R CMD check via GitHub actions:
+
+* local R installation - R 4.6, macOS (aarch64)
+* R CMD check via GitHub Actions:
+  * macos-latest (release)
   * windows-latest (release)
-  * macOS-latest (release)
-  * ubuntu-20.04 (release)
-  * ubunut-20.04 (devel)
+  * ubuntu-latest (devel)
+  * ubuntu-latest (release)
+  * ubuntu-latest (oldrel-1)
 
 ## R CMD check results
 
-There are no ERRORs or WARNINGs.
+0 errors | 0 warnings | 0 notes
 
-There is only 1 NOTE:
+## Reverse dependencies
 
-* This is a new release.
-
-
-## Downstream dependencies
-
-There are no current downstream dependencies.
-
-## Resubmission
-
-The suggested changed to the title and description have been made and all copyright holders for `diff_match_patch.h` have been added as authors with a "cph" role. 
-Finally, a Copyright field was added which also includes all copyright holders for 
-the included header.
+We checked 1 reverse dependency (md4r), comparing R CMD check results across CRAN and dev versions of this package.
