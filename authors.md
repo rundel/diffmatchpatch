@@ -22,16 +22,16 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/rundel/diffmatchpatch/blob/v0.2.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/rundel/diffmatchpatch/blob/main/DESCRIPTION)
 
 Rundel C (2026). *diffmatchpatch: String Diff, Match, and Patch
-Utilities*. R package version 0.2.0,
+Utilities*. R package version 0.2.1,
 <https://github.com/rundel/diffmatchpatch>.
 
     @Manual{,
       title = {diffmatchpatch: String Diff, Match, and Patch Utilities},
       author = {Colin Rundel},
       year = {2026},
-      note = {R package version 0.2.0},
+      note = {R package version 0.2.1},
       url = {https://github.com/rundel/diffmatchpatch},
     }
