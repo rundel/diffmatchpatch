@@ -98,3 +98,16 @@ test_that("patch_make and patch_apply round trip with many unique lines", {
   expect_identical(as.character(res), y)
   expect_true(all(attr(res, "matches")))
 })
+
+test_that("patch_apply fuzzy matches patches wider than match_max_bits", {
+  x = "x1234567890123456789012345678901234567890123456789012345678901234567890y"
+  p = patch_make(x, "xabcy")
+  res = patch_apply(sub("12345", "1_345", x, fixed = TRUE), p)
+  expect_patch(res, "xabcy", c(TRUE, TRUE))
+
+  x = paste(rev(strsplit("The quick brown fox jumps over the lazy dog, again and again.", "")[[1]]), collapse = "")
+  y = sub("xof", "tac", x, fixed = TRUE)
+  res = patch_apply(paste0("~~", sub("yzal", "yzzal", x, fixed = TRUE)), patch_make(x, y))
+  expect_identical(as.character(res), paste0("~~", sub("yzal", "yzzal", y, fixed = TRUE)))
+  expect_true(all(attr(res, "matches")))
+})

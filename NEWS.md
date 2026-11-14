@@ -1,3 +1,7 @@
+# diffmatchpatch 0.2.1
+
+* Fixed undefined behavior (left shift of negative values) in the Bitap matching code reported by CRAN's clang-UBSAN checks. The bit masks are now unsigned; results are unchanged.
+
 # diffmatchpatch 0.2.0
 
 * Updated `diff_match_patch.h` with the upstream fix for a buffer overflow in line mode diffs when there are more than 127 unique lines, which could crash R (leutloff/diff-match-patch-cpp-stl#19).

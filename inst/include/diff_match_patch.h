@@ -1659,7 +1659,7 @@ class diff_match_patch {
     }
 
     // Initialise the alphabet.
-    std::map<char_t, int> s; 
+    std::map<char_t, unsigned int> s;
     match_alphabet(pattern, s);
 
     // Highest score beyond which we give up.
@@ -1678,13 +1678,13 @@ class diff_match_patch {
     }
 
     // Initialise the bit arrays.
-    int matchmask = 1 << (pattern.length() - 1);
+    unsigned int matchmask = 1u << (pattern.length() - 1);
     best_loc = -1;
 
     int bin_min, bin_mid;
     int bin_max = pattern.length() + text.length();
-    int *rd;
-    int *last_rd = NULL;
+    unsigned int *rd;
+    unsigned int *last_rd = NULL;
     for (int d = 0; d < (int)pattern.length(); d++) {
       // Scan for the best match; each iteration allows for one more error.
       // Run a binary search to determine how far from 'loc' we can stray at
@@ -1705,10 +1705,10 @@ class diff_match_patch {
       int start = std::max(1, loc - bin_mid + 1);
       int finish = std::min(loc + bin_mid, (int)text.length()) + pattern.length();
 
-      rd = new int[finish + 2];
-      rd[finish + 1] = (1 << d) - 1;
+      rd = new unsigned int[finish + 2];
+      rd[finish + 1] = (1u << d) - 1;
       for (int j = finish; j >= start; j--) {
-        int charMatch;
+        unsigned int charMatch;
         if ((int)text.length() <= j - 1) {
           // Out of range.
           charMatch = 0;
@@ -1779,10 +1779,10 @@ class diff_match_patch {
    * @return Hash of character locations.
    */
  protected:
-  static void match_alphabet(const string_t &pattern, std::map<char_t, int>& s) {
+  static void match_alphabet(const string_t &pattern, std::map<char_t, unsigned int>& s) {
     // There is no need to initialize map values, since they are zero-initialized by default
     for (size_t i = 0; i < pattern.length(); i++)
-      s[pattern[i]] |= (1 << (pattern.length() - i - 1));
+      s[pattern[i]] |= (1u << (pattern.length() - i - 1));
   }
 
 
