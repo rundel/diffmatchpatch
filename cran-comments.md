@@ -1,6 +1,6 @@
 ## Submission
 
-This release fixes a buffer overflow in the bundled `diff_match_patch.h` header (from an upstream fix) that could crash R when diffing texts with more than 127 unique lines, fixes incorrect line mode diffs for texts with more than 255 unique lines, and adds a test suite.
+This is a patch release addressing the clang-UBSAN issue reported by CRAN for version 0.2.0 (<https://www.stats.ox.ac.uk/pub/bdr/memtests/clang-UBSAN/diffmatchpatch/>).
 
 ## Test environments
 
@@ -14,8 +14,10 @@ This release fixes a buffer overflow in the bundled `diff_match_patch.h` header 
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note
+
+* Note - Days since last update: 0. This release is a fix for the UBSAN issue described above.
 
 ## Reverse dependencies
 
-We checked 1 reverse dependency (md4r), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 1 reverse dependency (md4r) across CRAN and dev versions of this package.
