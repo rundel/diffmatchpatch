@@ -22,7 +22,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/rundel/diffmatchpatch/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/rundel/diffmatchpatch/blob/v0.2.0/DESCRIPTION)
 
 Rundel C (2026). *diffmatchpatch: String Diff, Match, and Patch
 Utilities*. R package version 0.2.0,
